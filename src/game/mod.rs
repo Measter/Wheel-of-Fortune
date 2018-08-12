@@ -32,20 +32,20 @@ pub struct Game {
     puzzle: Puzzle,
     round: u32,
     players: Vec<Player>,
-    num_players: usize,
+    // We don't really need to separately keep track of the number of players,
+    // as the player Vector keeps track of its own length.
     announcer: Announcer,
 }
 
 // initialization of Game
 impl Game {
     pub fn new(round: u32) -> Game {
-        let (players, num_players) = init_players();
+        let players = init_players();
 
         Game {
             puzzle: Puzzle::new(),
             round,
             players,
-            num_players,
             announcer: Announcer::new(round),
         }
     }
@@ -63,7 +63,7 @@ impl Game {
         let mut guess: String;
 
         while !solved {
-            for i in 0..self.num_players {
+            for i in 0..self.players.len() {
                 let ref mut player = self.players[i];
 
                 println!("Spin!");
@@ -107,7 +107,7 @@ impl Game {
     }
 }
 
-fn init_players() -> (Vec<Player>, usize) {
+fn init_players() -> Vec<Player> {
     let mut players: Vec<Player> = Vec::new();
 
     println!("How many players? ");
@@ -129,5 +129,5 @@ fn init_players() -> (Vec<Player>, usize) {
         players.push(player);
     }
 
-    (players, num_players)
+    players
 }
