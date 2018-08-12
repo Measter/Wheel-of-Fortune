@@ -26,15 +26,17 @@ fn get_puzzle() -> (String, String) {
     for key in puzzles.keys() {
         categories.push(key);
     }
-    let category_n = rng.gen_range(0, categories.len());
-    let category = categories[category_n];
+
+    // As in game::spin_wheel(), we'll use Rng::choose() for selecting the
+    // solution and category.
+    // Again, we know the input array is not empty, so we'll just unwrap.
+    let category = rng.choose(&categories).unwrap();
 
     let mut solutions: Vec<&str> = Vec::new();
     for val in &puzzles[category] {
         solutions.push(val);
     }
-    let solution_n = rng.gen_range(0, solutions.len());
-    let solution = solutions[solution_n];
+    let solution = rng.choose(&solutions).unwrap();
 
     (String::from(category), String::from(solution))
 }

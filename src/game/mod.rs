@@ -19,9 +19,13 @@ fn spin_wheel() -> i32 {
     let wheel = [
         2500, 600, 700, 600, 650, 500, 700, 600, 550, 500, 600, 650, 700, 800, 500, 650, 500, 900,
     ];
-    let index = rng.gen_range(0, wheel.len());
 
-    wheel[index]
+    // The index isn't being used for anything, so we'll change this to use
+    // Rand's Rng::choose();
+    // Because we know ahead of time that this is *not* empty, we'll just unwrap.
+    // Also note that this function returns a reference to the chose item. In this case
+    // it's an int, so we'll just dereference it.
+    *rng.choose(&wheel).unwrap()
 }
 
 pub struct Game {
