@@ -84,7 +84,9 @@ impl Puzzle {
     pub fn contains(&self, guess: &str) -> bool {
         // Checks if the guess is single char or string and if correct.
 
-        let trimmed_guess = guess.trim().to_string();
+        // No need to collect into a String, the &str we get from the trim works
+        // fine for what we need.
+        let trimmed_guess = guess.trim();
 
         if trimmed_guess.len() == 1 {
             self.check_guess_char(guess.chars().next().unwrap())
