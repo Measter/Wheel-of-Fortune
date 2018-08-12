@@ -105,7 +105,8 @@ impl Game {
             .read_line(&mut replay)
             .expect("Failed to read line");
 
-        if replay.chars().next().unwrap() == 'y' {
+        // Do a little pattern match instead of unwrapping.
+        if let Some('y') = replay.chars().next() {
             true
         } else {
             false
