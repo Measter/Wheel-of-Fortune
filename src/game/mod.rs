@@ -61,8 +61,6 @@ impl Game {
         // The welcome message is already a string, so no need for the to_string call.
         println!("{}", self.announcer.welcome);
 
-        let mut guess: String;
-
         while !solved {
             // Instead of going over a range of indices, we'll instead go over
             // the list of players directly.
@@ -75,7 +73,9 @@ impl Game {
                 println!("The wheel lands on ${}!", wheel_panel);
 
                 self.puzzle.print();
-                guess = player.play();
+                // This variable doesn't need to live beyond this loop as a new string
+                // is created every time anyway.
+                let guess = player.play();
 
                 // Check if a guess has already been made.
                 if self.puzzle.guesses.contains(&guess) {
