@@ -97,7 +97,8 @@ impl Puzzle {
         self.solution.contains(guess)
     }
 
-    fn check_guess_string(&self, guess: String) -> bool {
+    // As with a few other functions, this doesn't need to own its input.
+    fn check_guess_string(&self, guess: &str) -> bool {
         guess == self.solution
     }
 
