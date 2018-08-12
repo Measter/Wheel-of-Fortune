@@ -78,7 +78,9 @@ impl Puzzle {
         println!("{}\n", puzzle_board_string);
     }
 
-    pub fn contains(&self, guess: String) -> bool {
+    // This functions doesn't need to take an owned string to work,
+    // so we'll change it to take a string reference.
+    pub fn contains(&self, guess: &str) -> bool {
         // Checks if the guess is single char or string and if correct.
 
         let trimmed_guess = guess.trim().to_string();
@@ -98,7 +100,9 @@ impl Puzzle {
         guess == self.solution
     }
 
-    pub fn update(&mut self, guess: String) -> i32 {
+    // As with the contains() function above, this also doesn't need to
+    // own its string input.
+    pub fn update(&mut self, guess: &str) -> i32 {
         // TASK: This can be a lot cleaner. Probably a Rust matching way of doing this.
         let mut char_indicies: Vec<char> = Vec::new();
         let mut index: usize;
