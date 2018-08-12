@@ -38,7 +38,10 @@ fn get_puzzle() -> (String, String) {
     }
     let solution = rng.choose(&solutions).unwrap();
 
-    (String::from(category), String::from(solution))
+    // Due to the above changes, this no longer works as both strings are now
+    // of the type &&str, not &str.
+    // We could change this to a call to to_string(), but I'll just dereference them.
+    (String::from(*category), String::from(*solution))
 }
 
 // associated functions
