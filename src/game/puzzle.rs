@@ -143,13 +143,13 @@ fn get_dashes_from_(solution: String) -> (String, String) {
     let mut dashes_char = String::new();
 
     for character in solution.chars() {
-        if character == ' ' {
-            dashes_char.push(' ');
-        } else if character == '.' {
-            dashes_char.push('.');
-        } else {
-            dashes_char.push('_');
-        }
+        // We can replace this if-else with a match.
+        let character = match character {
+            ' ' | '.' => character,
+            _ => '_',
+        };
+
+        dashes_char.push(character);
     }
 
     (dashes_char, solution)
