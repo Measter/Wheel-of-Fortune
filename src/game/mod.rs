@@ -58,7 +58,8 @@ impl Game {
 
         let mut solved = false;
 
-        println!("{}", self.announcer.welcome.to_string());
+        // The welcome message is already a string, so no need for the to_string call.
+        println!("{}", self.announcer.welcome);
 
         let mut guess: String;
 
