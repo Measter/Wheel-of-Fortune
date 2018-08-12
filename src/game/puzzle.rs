@@ -22,10 +22,10 @@ fn get_puzzle() -> (String, String) {
     // in my opinion.
     let mut rng = rand::thread_rng();
 
-    let mut categories: Vec<&str> = Vec::new();
-    for key in puzzles.keys() {
-        categories.push(key);
-    }
+    // Instead of explicitly writing out a loop to create the category vector
+    // We can just collect the keys() return value directly.
+    // We need cloned() here to make sure we get a &str not a &&str.
+    let categories: Vec<&str> = puzzles.keys().cloned().collect();
 
     // As in game::spin_wheel(), we'll use Rng::choose() for selecting the
     // solution and category.
