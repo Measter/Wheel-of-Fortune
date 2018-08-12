@@ -66,14 +66,17 @@ impl Puzzle {
 
         println!("\nThe category is {}", self.category);
 
-        let mut puzzle_board = Vec::new();
+        // Instead of pushing to a vector, then collecting to a string we can just
+        // push onto the string directly.
+        // Because we know the length ahead of time, we can create the string with
+        // the appropriate capacity.
+        let mut puzzle_board = String::with_capacity(self.current_puzzle_board.len()*2);
         for character in self.current_puzzle_board.chars() {
             puzzle_board.push(character);
             puzzle_board.push(' ');
         }
 
-        let puzzle_board_string: String = puzzle_board.into_iter().collect();
-        println!("{}\n", puzzle_board_string);
+        println!("{}\n", puzzle_board);
     }
 
     // This functions doesn't need to take an owned string to work,
@@ -136,19 +139,18 @@ impl Puzzle {
 }
 
 fn get_dashes_from_(solution: String) -> (String, String) {
-    let mut dashes_char_vec = vec![];
+    // As in Puzzle::print(), there's no need to push to a vector first.
+    let mut dashes_char = String::new();
 
     for character in solution.chars() {
         if character == ' ' {
-            dashes_char_vec.push(' ');
+            dashes_char.push(' ');
         } else if character == '.' {
-            dashes_char_vec.push('.');
+            dashes_char.push('.');
         } else {
-            dashes_char_vec.push('_');
+            dashes_char.push('_');
         }
     }
 
-    let dashes: String = dashes_char_vec.into_iter().collect();
-
-    (dashes, solution)
+    (dashes_char, solution)
 }
