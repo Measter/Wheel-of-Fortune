@@ -17,18 +17,23 @@ fn get_puzzle() -> (String, String) {
         .cloned()
         .collect();
 
+    // We're reusing the RNG a couple times, so I would just call thread_rng once.
+    // It doesn't really change anything, but makes later lines easier to read
+    // in my opinion.
+    let mut rng = rand::thread_rng();
+
     let mut categories: Vec<&str> = Vec::new();
     for key in puzzles.keys() {
         categories.push(key);
     }
-    let category_n = rand::thread_rng().gen_range(0, categories.len());
+    let category_n = rng.gen_range(0, categories.len());
     let category = categories[category_n];
 
     let mut solutions: Vec<&str> = Vec::new();
     for val in &puzzles[category] {
         solutions.push(val);
     }
-    let solution_n = rand::thread_rng().gen_range(0, solutions.len());
+    let solution_n = rng.gen_range(0, solutions.len());
     let solution = solutions[solution_n];
 
     (String::from(category), String::from(solution))
