@@ -141,18 +141,13 @@ impl Puzzle {
 // This function doesn't need to own its input, so we'll change it to
 // only borrow, and also to only return the dashed version.
 fn get_dashes_from_(solution: &str) -> String {
-    // As in Puzzle::print(), there's no need to push to a vector first.
-    let mut dashes_char = String::new();
-
-    for character in solution.chars() {
-        // We can replace this if-else with a match.
-        let character = match character {
-            ' ' | '.' => character,
-            _ => '_',
-        };
-
-        dashes_char.push(character);
-    }
-
-    dashes_char
+    // In fact, we can replace this entire function with a map and collect.
+    solution.chars()
+        .map(|c|
+            match c {
+                ' ' | '.' => c,
+                _ => '_'
+            }
+        )
+        .collect()
 }
