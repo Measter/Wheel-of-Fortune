@@ -47,7 +47,7 @@ impl Puzzle {
     pub fn new() -> Puzzle {
         // Creates a new Puzzle object.
         let (category, solution) = get_puzzle();
-        let (current_puzzle_board, solution) = get_dashes_from_(solution);
+        let current_puzzle_board = get_dashes_from_(&solution);
         let guesses = Vec::new();
 
         Puzzle {
@@ -138,7 +138,9 @@ impl Puzzle {
     }
 }
 
-fn get_dashes_from_(solution: String) -> (String, String) {
+// This function doesn't need to own its input, so we'll change it to
+// only borrow, and also to only return the dashed version.
+fn get_dashes_from_(solution: &str) -> String {
     // As in Puzzle::print(), there's no need to push to a vector first.
     let mut dashes_char = String::new();
 
@@ -152,5 +154,5 @@ fn get_dashes_from_(solution: String) -> (String, String) {
         dashes_char.push(character);
     }
 
-    (dashes_char, solution)
+    dashes_char
 }
