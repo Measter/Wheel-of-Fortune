@@ -131,7 +131,7 @@ fn init_players() -> Vec<Player> {
             .read_line(&mut player_name)
             .expect("Failed to read line");
 
-        let player = Player::new(player_name);
+        let player = Player::new(&player_name);
 
         players.push(player);
     }

@@ -7,7 +7,9 @@ pub struct Player {
 
 // associated functions
 impl Player {
-    pub fn new(name: String) -> Player {
+    // This function doesn't need to own its input, as it trims and creates
+    // a new string anyway.
+    pub fn new(name: &str) -> Player {
         // Creates a new Player object with name, player starts with $0.
         Player {
             name: name.trim().to_string(),
