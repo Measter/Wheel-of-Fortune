@@ -70,13 +70,13 @@ impl Puzzle {
         // push onto the string directly.
         // Because we know the length ahead of time, we can create the string with
         // the appropriate capacity.
-        let mut puzzle_board = String::with_capacity(self.current_puzzle_board.len()*2);
+        // We can further avoid an allocation here by just printing the character
+        // directly instead of pushing into a string first.
         for character in self.current_puzzle_board.chars() {
-            puzzle_board.push(character);
-            puzzle_board.push(' ');
+            print!("{} ", character);
         }
 
-        println!("{}\n", puzzle_board);
+        println!();
     }
 
     // This functions doesn't need to take an owned string to work,
