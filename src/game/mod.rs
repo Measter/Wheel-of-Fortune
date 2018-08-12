@@ -64,9 +64,11 @@ impl Game {
         let mut guess: String;
 
         while !solved {
-            for i in 0..self.players.len() {
-                let ref mut player = self.players[i];
-
+            // Instead of going over a range of indices, we'll instead go over
+            // the list of players directly.
+            // The mutable borrow on self.players is so the loop does not consume
+            // the vector, which is not what we want.
+            for player in &mut self.players {
                 println!("Spin!");
 
                 let wheel_panel = spin_wheel();
