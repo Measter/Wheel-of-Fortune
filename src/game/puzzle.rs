@@ -32,11 +32,9 @@ fn get_puzzle() -> (String, String) {
     // Again, we know the input array is not empty, so we'll just unwrap.
     let category = rng.choose(&categories).unwrap();
 
-    let mut solutions: Vec<&str> = Vec::new();
-    for val in &puzzles[category] {
-        solutions.push(val);
-    }
-    let solution = rng.choose(&solutions).unwrap();
+    // We can just get rid of creating the solution vector completely, as
+    // the indexing returns what we need already.
+    let solution = rng.choose(&puzzles[category]).unwrap();
 
     // Due to the above changes, this no longer works as both strings are now
     // of the type &&str, not &str.
