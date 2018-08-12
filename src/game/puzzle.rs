@@ -114,14 +114,13 @@ impl Puzzle {
         let mut char_indicies: Vec<char> = self.current_puzzle_board.chars().collect();
 
         for character in guess.trim().chars() {
-            // Index is only used inside this loop, so we can declare it here.
-            let mut index = 0;
-            for solution_character in self.solution.chars() {
+            // There's no need at all to track the index manually, as there's an enumerate
+            // function that can do it for us.
+            for (index, solution_character) in self.solution.chars().enumerate() {
                 if character == solution_character {
                     char_indicies[index] = character;
                     num_in_solution += 1;
                 }
-                index += 1;
             }
 
             // index = self.solution.chars().position(|c| c == character).unwrap();
